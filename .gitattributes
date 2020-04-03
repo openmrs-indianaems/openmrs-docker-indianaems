@@ -1,7 +1,7 @@
 # Files that are going to be encrypted
-.env filter=git-crypt diff=git-crypt
-.gpg filter=git-crypt diff=git-crypt
-.key filter=git-crypt diff=git-crypt
+*.env filter=git-crypt diff=git-crypt
+*.gpg filter=git-crypt diff=git-crypt
+*.key filter=git-crypt diff=git-crypt
 
 # Making sure that .gitattributes is never encrypted. DON'T TOUCH THIS LINE AND ONE BELOW
 .gitattributes !filter !diff
