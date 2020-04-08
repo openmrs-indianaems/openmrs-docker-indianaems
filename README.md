@@ -58,3 +58,15 @@ But to make sure to destroy containers to delete any left overs volumes and data
 ```
 $ docker-compose down -v
 ```
+
+
+## To run SQL commands
+
+To backup -
+```
+docker exec [containerId] /usr/bin/mysqldump -u openmrs --password=[password] openmrs > backup-04-08-2020.sql
+```
+To restore -
+```
+cat backup-04-08-2020.sql | docker exec -i [containerId] /usr/bin/mysql -u openmrs --password=[password] openmrs
+```
