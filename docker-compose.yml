@@ -31,7 +31,7 @@ services:
       DB_CREATE_TABLES: 'true'
       DB_AUTO_UPDATE: 'true'
       MODULE_WEB_ADMIN: 'true'
-      _JAVA_OPTIONS: -Xmx3g -Xms3g # change this depending on the server config
+      _JAVA_OPTIONS: -Xmx4g -Xms4g # change this depending on the server config
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs/"]
       timeout: 20s
@@ -39,8 +39,8 @@ services:
       - openmrs-referenceapplication-data:/usr/local/tomcat/.OpenMRS/
       - /usr/local/tomcat/.OpenMRS/modules/ # do not store modules in data
       - /usr/local/tomcat/.OpenMRS/owa/ # do not store owa in data
-      - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
-      
+      #- ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml # to increase connection timeout
+
   iems-openmrs-nginx:
     restart: "always"
     image: nginx:alpine
