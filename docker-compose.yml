@@ -13,7 +13,7 @@ services:
     healthcheck:
       test: "exit 0"
     volumes:
-     # - ./dbdump:/docker-entrypoint-initdb.d #uncomment this if you need to use a backup sql to initialize the databse
+      - ./dbdump:/docker-entrypoint-initdb.d #comment this if you dont need to use a backup sql to initialize the database
       - openmrs-referenceapplication-mysql-data:/var/lib/mysql
 
   openmrs-referenceapplication:
