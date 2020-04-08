@@ -19,17 +19,13 @@ $ sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker
 $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose --version
 ```
+## Getting the code
+```
+git clone https://github.com/openmrs-indianaems/openmrs-docker-indianaems.git
+cd openmrs-docker-indianaems
+```
 
 ## Running it locally
-
-To start both containers and see the running log:
-```
-$ docker-compose down -v
-$ docker-compose up
-```
-Use _CTRL + C_ to stop it all containers. 
-
-or 
 
 To start the containers in a detached mode -
 
