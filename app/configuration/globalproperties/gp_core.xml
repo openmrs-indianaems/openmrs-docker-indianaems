@@ -1,0 +1,28 @@
+<config>
+  <globalProperties>
+    <globalProperty>
+      <property>appointmentschedulingui.started</property>
+      <value>false</value>
+    </globalProperty>
+    <globalProperty>
+      <property>atlas.stopAskingToConfigure</property>
+      <value>true</value>
+    </globalProperty>
+    <globalProperty>
+      <property>attachments.started</property>
+      <value>false</value>
+    </globalProperty>
+    <globalProperty>
+      <property>metadatamapping.addLocalMappings</property>
+      <value>true</value>
+    </globalProperty>
+    <globalProperty>
+      <property>ciel.conceptsVersion</property>
+      <value>20200318</value>
+    </globalProperty>
+    <globalProperty>
+      <property>metadatamapping.localConceptSourceUuid</property>
+      <value>21ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</value>
+    </globalProperty>
+  </globalProperties>
+</config>
