@@ -1,25 +1,25 @@
-version: '2.1'
-  
+version: "2.1"
+​
 services:
-  openmrs-referenceapplication-mysql:
+  mysql:
     restart: "always"
     image: mysql:5.6
     ports:
       - "3306:3306"
-    command: "mysqld --character-set-server=utf8 --collation-server=utf8_general_ci"
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_bin --default-storage-engine=INNODB --max_allowed_packet=256M --innodb_log_file_size=2GB --transaction-isolation=READ-COMMITTED --binlog_format=row --innodb_buffer_pool_size=4G"
     env_file:
-      - ./openmrs_env/mysql.env # move those environment variables below into file mysql.env (for example: MYSQL_DATABASE=openmrs)
-#    environment:
-#      MYSQL_DATABASE: ${MYSQL_DB:-openmrs}
-#      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Admin123}
-#      MYSQL_USER: ${MYSQL_USER:-openmrs}
-#      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-Admin123}
+      openmrs_mysql.env
     healthcheck:
-      test: "exit 0"
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] 
+      timeout: 10s
+      retries: 10
+      interval: 1m
+      #      start-period: 2m
     volumes:
-     # - ./dbdump:/docker-entrypoint-initdb.d #uncomment this if you need to use a backup sql to initialize the databse
-      - openmrs-referenceapplication-mysql-data:/var/lib/mysql
+      - ./dbdump:/docker-entrypoint-initdb.d
+      - /data/database:/var/lib/mysql
+      - /data/backup:/backup
     container_name: openmrs-mysql
 
 volumes:
-   openmrs-referenceapplication-mysql-data:
+  mysql-data:
