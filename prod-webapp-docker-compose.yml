@@ -22,6 +22,7 @@ services:
       - ./openmrs_env/openmrs.env # move those environment variables below into file openmrs.env (for example: DB_DATABASE=openmrs)
     environment:
       - VIRTUAL_HOST=openmrs.ihie.org # virtual host for nginx_https (later this should be hooked up with certificate)
+      - "TZ=America/Indianapolis"
     volumes:
 #      - /data/docker/run/openmrs:/usr/local/tomcat/.OpenMRS/
       - openmrs-referenceapplication-data:/usr/local/tomcat/.OpenMRS/
