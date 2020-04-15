@@ -19,6 +19,7 @@ services:
     volumes:
      # - ./dbdump:/docker-entrypoint-initdb.d #uncomment this if you need to use a backup sql to initialize the databse
       - openmrs-referenceapplication-mysql-data:/var/lib/mysql
+    container_name: openmrs-mysql
 
 volumes:
    openmrs-referenceapplication-mysql-data:
