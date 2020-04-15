@@ -14,7 +14,7 @@ services:
 ​
   openmrs-referenceapplication:
     restart: "always"
-    image: openmrs/openmrs-reference-application-distro:demo
+    image: openmrs/openmrs-reference-application-distro:2.10.0
     expose:
       - 8080
     container_name: openmrs
