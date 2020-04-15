@@ -13,12 +13,12 @@ services:
     healthcheck:
       test: "exit 0"
     volumes:
-      - ./dbdump:/docker-entrypoint-initdb.d #comment this if you dont need to use a backup sql to initialize the database
+     # - ./dbdump:/docker-entrypoint-initdb.d #comment this if you dont need to use a backup sql to initialize the database
       - openmrs-referenceapplication-mysql-data:/var/lib/mysql
 
   openmrs-referenceapplication:
     restart: "always"
-    image: openmrs/openmrs-reference-application-distro:demo
+    image: openmrs/openmrs-reference-application-distro:2.10.0
     depends_on:
       - openmrs-referenceapplication-mysql
     ports:
@@ -39,7 +39,7 @@ services:
       - openmrs-referenceapplication-data:/usr/local/tomcat/.OpenMRS/
       - /usr/local/tomcat/.OpenMRS/modules/ # do not store modules in data
       - /usr/local/tomcat/.OpenMRS/owa/ # do not store owa in data
-      #- ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml # to increase connection timeout
+      - ./configuration:/usr/local/tomcat/.OpenMRS/configuration
 
   iems-openmrs-nginx:
     restart: "always"

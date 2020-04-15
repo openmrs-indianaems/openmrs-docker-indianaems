@@ -1,0 +1,2 @@
+Uuid,Void/Retire,Name,Description,Format,Foreign uuid,Searchable,_order:1000
+971c4655-b372-47ab-83c0-07c671c4b468,,Social Security Number,Social security number of patient,java.lang.String,,No,
