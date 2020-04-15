@@ -25,7 +25,7 @@ git clone https://github.com/openmrs-indianaems/openmrs-docker-indianaems.git
 cd openmrs-docker-indianaems
 ```
 
-## Running it locally
+## Running the dev environment locally in a single instance
 
 To start the containers in a detached mode -
 
@@ -69,4 +69,30 @@ docker exec [containerId] /usr/bin/mysqldump -u openmrs --password=[password] op
 To restore -
 ```
 cat backup-04-08-2020.sql | docker exec -i [containerId] /usr/bin/mysql -u openmrs --password=[password] openmrs
+
 ```
+
+
+## Installation in the production environment in a two environment setup
+To start the containers in a detached mode -
+
+```
+$ docker-compose down -v
+$ docker-compose up -d 
+```
+
+to see the logs you can use -
+
+```
+docker-compose logs -f
+```
+log into mysql container
+```
+docker exec -it openmrs-mysql 
+mysql -u openmrs -p
+update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null; # remove all synonyms
+create temporary table foo (select t2.concept_name_id from openmrs.concept_name t1  join openmrs.concept_name t2 on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED" join openmrs.concept t3 on t1.concept_id=t3.concept_id join openmrs.concept t4 on t2.concept_id=t4.concept_id where t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0);
+update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_id in (select concept_name_id from foo)
+```
+after OpenMRS Reference application is available log in and load the initializer module available in this repository under /modules/ through OpenMRS manage modules function. 
+NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and this will take around 40 minutes to load all the concepts the first time.
