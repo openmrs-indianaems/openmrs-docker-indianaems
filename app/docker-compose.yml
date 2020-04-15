@@ -1,0 +1,21 @@
+version: "3.0"
+
+services:
+  openmrs-reference-application:
+    image: openmrs/openmrs-reference-application-distro:2.10.0
+    environment:
+      DB_HOST: ${MYSQL_DB_HOST:-mysql}
+      DB_DATABASE: ${MYSQL_DB:-openmrs}
+      DB_USERNAME: ${MYSQL_USER:-openmrs}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-Admin123}
+      DB_CREATE_TABLES: "true"
+      DB_AUTO_UPDATE: "true"
+      MODULE_WEB_ADMIN: "true"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "openmrs-reference-application-data:/usr/local/tomcat/.OpenMRS/"
+      - "./configuration:/usr/local/tomcat/.OpenMRS/configuration"
+
+volumes:
+  openmrs-reference-application-data:

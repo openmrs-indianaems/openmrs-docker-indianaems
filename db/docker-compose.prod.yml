@@ -1,25 +1,19 @@
-version: "2.1"
+version: "3"
 ​
 services:
   mysql:
     restart: "always"
-    image: mysql:5.6
-    ports:
-      - "3306:3306"
     command: "mysqld --character-set-server=utf8 --collation-server=utf8_bin --default-storage-engine=INNODB --max_allowed_packet=256M --innodb_log_file_size=2GB --transaction-isolation=READ-COMMITTED --binlog_format=row --innodb_buffer_pool_size=4G"
     env_file:
-      openmrs_mysql.env
+      - prod.env
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] 
       timeout: 10s
       retries: 10
       interval: 1m
-      #      start-period: 2m
+      #start-period: 2m
     volumes:
       - ./dbdump:/docker-entrypoint-initdb.d
       - /data/database:/var/lib/mysql
       - /data/backup:/backup
     container_name: openmrs-mysql
-
-volumes:
-  mysql-data:
