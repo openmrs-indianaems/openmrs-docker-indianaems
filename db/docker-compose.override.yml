@@ -1,0 +1,9 @@
+version: "3.0"
+
+services:
+  mysql:
+    env_file: .dev.env
+    volumes:
+      - ./dbdump:/docker-entrypoint-initdb.d
+      - ../local/data/database:/var/lib/mysql
+      - ../local/data/backup:/backup

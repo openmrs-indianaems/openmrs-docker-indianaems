@@ -1,5 +1,5 @@
 version: "3.0"
-  
+
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -11,11 +11,11 @@ services:
       - /data/docker/etc:/etc/nginx/certs # mount certificate directory
       - /var/run/docker.sock:/tmp/docker.sock:ro
     container_name: nginx-proxy
-​
+
   openmrs-reference-application:
     restart: "always"
     container_name: openmrs
-    env_file: .prod.env
+    env_file: .staging.env
     ports:
       - "127.0.0.1:8080:8080" # specify 127.0.0.1 to keep docker from bypassing firewall (ufw)
     healthcheck:
@@ -26,4 +26,3 @@ services:
       - /data/tomcat/.OpenMRS/owa/ # do not store owa in data
       # - /data/docker/run/setenv.sh:/usr/local/tomcat/bin/setenv.sh
       - /data/docker/run/tomcat_log:/usr/local/tomcat/logs
-​

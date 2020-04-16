@@ -1,3 +1,5 @@
+# Local files (folder for saving backups locally without committing them to repo)
+local/
 
 # Mac OS files
 .DS_Store
