@@ -8,7 +8,7 @@ services:
       - "443:443"
     restart: always
     volumes:
-      - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/nginx-proxy.conf
+      - ./nginx/vhost.d:/etc/nginx/vhost.d:ro
       - /data/docker/etc:/etc/nginx/certs # mount certificate directory
       - /var/run/docker.sock:/tmp/docker.sock:ro
     container_name: nginx-proxy
