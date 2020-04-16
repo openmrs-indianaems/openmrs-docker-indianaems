@@ -25,6 +25,9 @@ git clone https://github.com/openmrs-indianaems/openmrs-docker-indianaems.git
 cd openmrs-docker-indianaems
 ```
 
+NOTE: environment files for staging and production are encrypted using `git-crypt`. Your public gpg key must be 
+registered within the repository before you can access these encrypted files.
+
 ## Running the dev environment locally in a single instance
 
 To start the containers in a detached mode:
