@@ -87,10 +87,29 @@ $ cd db
 $ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-### 2. Prepare database on db server
+### 2. Start OpenMRS on app server
 
 ```
-$ docker exec -it openmrs-mysql bash
+$ cd app
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+There are convenience scripts for staging & production, so you don't have to remember to invoke two docker-compose files:
+
+```
+$ ./staging up -d
+```
+
+and
+
+```
+$ ./production up -d
+```
+
+### 3. Clear out concepts on db server
+
+```
+$ docker exec -it openmrs bash
 # mysql -u openmrs -p
 > use openmrs;
 > -- remove all synonyms
@@ -110,23 +129,16 @@ $ docker exec -it openmrs-mysql bash
   where concept_name_id in (select concept_name_id from foo);
 ```
 
-### 3. Start OpenMRS
-
-```
-$ cd app
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
 ### 4. Initialize Metadata
 
-First, start monitoring logs in a terminal:
+First, start monitoring logs in a terminal on app server:
 
 ```
 docker logs -f openmrs
 ```
 
-After the OpenMRS Reference application is available, log in and load the initializer module (available in this 
-repository under app/modules/) through OpenMRS manage modules feature.
+Log in through the Reference Application user interface, navigate to System Administration > Manage Module, and 
+load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature.
 
 NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes or so to 
 load all the concepts the first time.
