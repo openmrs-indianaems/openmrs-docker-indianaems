@@ -16,6 +16,8 @@ services:
     restart: "always"
     container_name: openmrs
     env_file: .prod.env
+    expose:
+      - 8080
     ports:
       - "127.0.0.1:8080:8080" # specify 127.0.0.1 to keep docker from bypassing firewall (ufw)
     healthcheck:
