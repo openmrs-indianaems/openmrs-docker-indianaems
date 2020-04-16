@@ -27,27 +27,26 @@ cd openmrs-docker-indianaems
 
 ## Running the dev environment locally in a single instance
 
-To start the containers in a detached mode -
+To start the containers in a detached mode:
 
 ```
-$ docker-compose down -v
+$ cd app
 $ docker-compose up -d 
 ```
 
-to see the logs you can use -
+To see the logs:
 
 ```
-docker-compose logs -f
+$ docker logs -f app_openmrs-reference-application_1
 ```
-
-
 
 Application will be eventually accessible on http://localhost:8080/openmrs.
+
 Credentials on shipped demo data:
   - Username: admin
   - Password: Admin123
 
-To stop the instance use -
+To stop the instance use:
 
 ```
 $ docker-compose down
@@ -60,39 +59,73 @@ $ docker-compose down -v
 ```
 
 
-## To run SQL commands
+## Database backup
 
-To backup -
+To backup:
+
 ```
-docker exec [containerId] /usr/bin/mysqldump -u openmrs --password=[password] openmrs > backup-04-08-2020.sql
+docker exec [containerId] /usr/bin/mysqldump -u openmrs --password=[password] openmrs > backup.sql
 ```
-To restore -
+
+To restore:
+
 ```
-cat backup-04-08-2020.sql | docker exec -i [containerId] /usr/bin/mysql -u openmrs --password=[password] openmrs
+cat backup.sql | docker exec -i [containerId] /usr/bin/mysql -u openmrs --password=[password] openmrs
 
 ```
 
 
 ## Installation in the production environment in a two environment setup
-To start the containers in a detached mode -
+
+### 1. Start the Database on db server
 
 ```
-$ docker-compose down -v
-$ docker-compose up -d 
+$ cd db
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-to see the logs you can use -
+### 2. Prepare database on db server
 
 ```
-docker-compose logs -f
+$ docker exec -it openmrs-mysql bash
+# mysql -u openmrs -p
+> use openmrs;
+> -- remove all synonyms
+> update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
+> -- create temp table of fully specified, active concept names
+> create temporary table foo (
+    select t2.concept_name_id from openmrs.concept_name t1 
+      join concept_name t2
+      on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
+      join concept t3 on t1.concept_id=t3.concept_id
+      join concept t4 on t2.concept_id=t4.concept_id
+    where
+      t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
+  );
+> -- void all existing concepts
+> update concept_name set voided=1, date_voided=now(), voided_by=1
+  where concept_name_id in (select concept_name_id from foo);
 ```
-log into mysql container
+
+### 3. Start OpenMRS
+
 ```
-docker exec -it openmrs-mysql 
-mysql -u openmrs -p
-update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null; # remove all synonyms
-create temporary table foo (select t2.concept_name_id from openmrs.concept_name t1  join openmrs.concept_name t2 on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED" join openmrs.concept t3 on t1.concept_id=t3.concept_id join openmrs.concept t4 on t2.concept_id=t4.concept_id where t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0);
-update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_id in (select concept_name_id from foo)
+$ cd app
+$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
-after OpenMRS Reference application is available log in and load the initializer module available in this repository under /modules/ through OpenMRS manage modules function. 
-NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and this will take around 40 minutes to load all the concepts the first time.
+
+### 4. Initialize Metadata
+
+First, start monitoring logs in a terminal:
+
+```
+docker logs -f openmrs
+```
+
+After the OpenMRS Reference application is available, log in and load the initializer module (available in this 
+repository under app/modules/) through OpenMRS manage modules feature.
+
+NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes or so to 
+load all the concepts the first time.
+
+
