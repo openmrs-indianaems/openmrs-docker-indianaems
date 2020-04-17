@@ -1,5 +1,5 @@
 version: "3.0"
-  
+
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -9,8 +9,8 @@ services:
     restart: always
     volumes:
       - /data/docker/etc:/etc/nginx/certs # mount certificate directory
+      - ./nginx/vhost.d:/etc/nginx/vhost.d:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/vhost.d:/etc/nginx/vhost.d
     container_name: nginx-proxy
 ​
   openmrs-reference-application:
