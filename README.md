@@ -111,11 +111,22 @@ $ ./production up -d
 ```
 $ docker exec -it openmrs bash
 # mysql -u openmrs -p
-> use openmrs;
-> -- remove all synonyms
-> update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
-> -- create temp table of fully specified, active concept names
-> create temporary table foo (
+```
+
+```
+use openmrs;
+```
+
+Remove all synonyms
+
+```
+update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
+```
+
+Create temp table of fully specified, active concept names
+
+```
+create temporary table foo (
     select t2.concept_name_id from openmrs.concept_name t1 
       join concept_name t2
       on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
@@ -124,8 +135,11 @@ $ docker exec -it openmrs bash
     where
       t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
   );
-> -- void all existing concepts
-> update concept_name set voided=1, date_voided=now(), voided_by=1
+```
+
+Void all existing concepts
+
+```update concept_name set voided=1, date_voided=now(), voided_by=1
   where concept_name_id in (select concept_name_id from foo);
 ```
 
