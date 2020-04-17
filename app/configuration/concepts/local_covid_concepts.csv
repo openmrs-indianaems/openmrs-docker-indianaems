@@ -2,7 +2,7 @@ Uuid,Fully specified name:en,Short name:en,Description:en,Data class,Data type,A
 feb7187c-8b38-4d28-8915-6046df9ccca4,Patient has tested for SARS-CoV-2,,,Question,Coded,CIEL:1065;CIEL:1066;CIEL:1067,,,
 f60ddb4e-6b92-46e6-b28a-932d70e9b24e,History of Positive Test for SARS-CoV-2,,,Finding,Coded,CIEL:1065;CIEL:1066;CIEL:1067,,,
 987a7256-ed27-4747-b9cc-c46472dd2a3c,Resident of External Care Facility,,The patient lives in an External Care Facility,Finding,N/A,,,,
-57b762ca-0ea8-4e86-9449-18c58a651cf3,SARS-CoV-2 Occupational Exposure,,Any exposures to SARS-CoV-2 related to the patient's occupation,Question,Coded,CIEL:163468;CIEL:5619;987a7256-ed27-4747-b9cc-c46472dd2a3c,,,
+57b762ca-0ea8-4e86-9449-18c58a651cf3,SARS-CoV-2 Occupational Exposure,,Any exposures to SARS-CoV-2 related to the patient's occupation,Question,Coded,163468AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;5619AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;987a7256-ed27-4747-b9cc-c46472dd2a3c,,,
 ec674909-4b26-47ea-b4b8-7628dc38728b,SARS-CoV-2 Non-Occupational Exposure,,Any exposures to SARS-CoV-2 unrelated to the patient's occupation,Question,Coded,CIEL:165833;CIEL:165850,,,
 06af6a7b-60c9-46a2-8a4c-189fa675bb90,Number of days SARS-CoV-2 symptoms have been present,,Days since first appearance of the signs or symptoms of SARS-CoV-2.,Finding,Numeric,,,,
 f3f0fdd4-632d-4998-9637-1a32c02a4512,PROBLEM LIST - COVID,,,Diagnosis,Coded,CIEL:117277;CIEL:119481;CIEL:6032;CIEL:6033;CIEL:165646;CIEL:116031;CIEL:121375;CIEL:155569;CIEL:119270;CIEL:5016;CIEL:117399;CIEL:155;CIEL:134337;CIEL:145439;CIEL:5622;CIEL:1295;CIEL:111103;CIEL:119910,,,
