@@ -12,7 +12,7 @@ services:
       interval: 1m
       #start-period: 2m
     volumes:
-      # - ./dbdump:/docker-entrypoint-initdb.d
+      - /data/initdb:/docker-entrypoint-initdb.d
       - /data/database:/var/lib/mysql
       - /data/backup:/backup
     container_name: openmrs-mysql
