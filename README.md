@@ -194,4 +194,7 @@ https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/html
 
 Replace the default HTML with the above HTML in the form and save
 
+#### 5.4 Roles (A Standard User)
+#### 5.5 Manage Apps (Stop apps and copy Burke's Register APP)
+
 
