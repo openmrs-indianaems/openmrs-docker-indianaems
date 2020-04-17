@@ -111,11 +111,22 @@ $ ./production up -d
 ```
 $ docker exec -it openmrs bash
 # mysql -u openmrs -p
-> use openmrs;
-> -- remove all synonyms
-> update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
-> -- create temp table of fully specified, active concept names
-> create temporary table foo (
+```
+
+```
+use openmrs;
+```
+
+Remove all synonyms
+
+```
+update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
+```
+
+Create temp table of fully specified, active concept names
+
+```
+create temporary table foo (
     select t2.concept_name_id from openmrs.concept_name t1 
       join concept_name t2
       on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
@@ -124,8 +135,12 @@ $ docker exec -it openmrs bash
     where
       t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
   );
-> -- void all existing concepts
-> update concept_name set voided=1, date_voided=now(), voided_by=1
+```
+
+Void all existing concepts
+
+```
+update concept_name set voided=1, date_voided=now(), voided_by=1
   where concept_name_id in (select concept_name_id from foo);
 ```
 
@@ -142,5 +157,41 @@ load the initializer module (available in this repository under app/modules/) th
 
 NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes or so to 
 load all the concepts the first time.
+
+### 5. Manual Steps
+
+#### 5.1 Remove Locations 
+Go to System Administration > Advanced Administration > Manage Locations 
+Select the locations as shown in the image and click on Delete Locations
+
+<img width="279" alt="Screen Shot 2020-04-17 at 8 31 29 AM" src="https://user-images.githubusercontent.com/1560244/79569871-74192780-8086-11ea-8dd1-8e837f0e8d56.png">
+
+**Note:** This action may result in an error, just click on back on your browser and you should see the locations to be updated appropriately
+
+#### 5.2 Change Identifier 
+**NOTE:** This should happen before adding any patients or it might lead to inconsistent behaviour
+
+Go to System Administration > Advanced Administration > Manage Patient Identifier Sources
+
+Click on Configure
+
+Change First Identifier Source to 100
+
+Suffix - CE
+
+Min Length 3
+
+#### 5.3 Add HTML Form 
+Go to System Administration > Advanced Administration > Manage HTML Forms 
+
+Click on New HTML Form
+
+Select Name as COVID-19 NOTE 
+
+Version is the one highlighted in the
+
+https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/htmlform/COVID-19%20Note.html
+
+Replace the default HTML with the above HTML in the form and save
 
 

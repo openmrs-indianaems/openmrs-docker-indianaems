@@ -8,8 +8,8 @@ services:
       - "443:443"
     restart: always
     volumes:
-      - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/nginx-proxy.conf
       - /data/docker/etc:/etc/nginx/certs # mount certificate directory
+      - ./nginx/vhost.d:/etc/nginx/vhost.d:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     container_name: nginx-proxy
 
@@ -19,13 +19,9 @@ services:
     env_file: .staging.env
     expose:
       - 8080
-    ports:
-      - "8080:8080"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/openmrs/"]
       timeout: 20s
     volumes:
-      - /data/tomcat/.OpenMRS/modules/ # do not store modules in data
-      - /data/tomcat/.OpenMRS/owa/ # do not store owa in data
-      # - /data/docker/run/setenv.sh:/usr/local/tomcat/bin/setenv.sh
       - /data/docker/run/tomcat_log:/usr/local/tomcat/logs
+      # - /data/docker/run/setenv.sh:/usr/local/tomcat/bin/setenv.sh
