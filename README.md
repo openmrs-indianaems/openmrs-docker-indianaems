@@ -155,18 +155,28 @@ Select the locations as shown in the image and click on Delete Locations
 
 #### 5.2 Change Identifier 
 **NOTE:** This should happen before adding any patients or it might lead to inconsistent behaviour
+
 Go to System Administration > Advanced Administration > Manage Patient Identifier Sources
+
 Click on Configure
+
 Change First Identifier Source to 100
+
 Suffix - CE
+
 Min Length 3
 
 #### 5.3 Add HTML Form 
 Go to System Administration > Advanced Administration > Manage HTML Forms 
+
 Click on New HTML Form
+
 Select Name as COVID-19 NOTE 
+
 Version is the one highlighted in the
+
 https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/htmlform/COVID-19%20Note.html
+
 Replace the default HTML with the above HTML in the form and save
 
 
