@@ -3,11 +3,9 @@ version: "3.0"
 services:
   openmrs-reference-application:
     image: openmrs/openmrs-reference-application-distro:2.10.0
-    ports:
-      - "8080:8080"
     volumes:
-      - "openmrs-reference-application-data:/usr/local/tomcat/.OpenMRS/"
-      - "./configuration:/usr/local/tomcat/.OpenMRS/configuration"
+      - openmrs-reference-application-data:/usr/local/tomcat/.OpenMRS/
+      - ./configuration:/usr/local/tomcat/.OpenMRS/configuration
 
 volumes:
   openmrs-reference-application-data:
