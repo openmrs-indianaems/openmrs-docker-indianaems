@@ -139,7 +139,8 @@ create temporary table foo (
 
 Void all existing concepts
 
-```update concept_name set voided=1, date_voided=now(), voided_by=1
+```
+update concept_name set voided=1, date_voided=now(), voided_by=1
   where concept_name_id in (select concept_name_id from foo);
 ```
 
