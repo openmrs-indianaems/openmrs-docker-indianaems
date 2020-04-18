@@ -12,7 +12,7 @@ services:
       - ./nginx/vhost.d:/etc/nginx/vhost.d:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     container_name: nginx-proxy
-​
+
   openmrs-reference-application:
     restart: "always"
     container_name: openmrs
