@@ -27,7 +27,7 @@ git clone https://github.com/openmrs-indianaems/openmrs-docker-indianaems.git
 cd openmrs-docker-indianaems
 ```
 
-Next, install client-side git hooks to keep encrypted files safe:
+Next, perform one-time install of client-side git hooks and trigger merge hook to keep encrypted files safe:
 ```
 conf/install-hooks.sh
 .git/hooks/post-merge
