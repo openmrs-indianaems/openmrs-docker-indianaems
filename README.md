@@ -20,13 +20,24 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose --version
 ```
 ## Getting the code
+
+First clone the code:
 ```
 git clone https://github.com/openmrs-indianaems/openmrs-docker-indianaems.git
 cd openmrs-docker-indianaems
 ```
 
+Next, install client-side git hooks to keep encrypted files safe:
+```
+conf/install-hooks.sh
+.git/hooks/post-merge
+```
+
 NOTE: environment files for staging and production are encrypted using `git-crypt`. Your public gpg key must be 
-registered within the repository before you can access these encrypted files.
+registered within the repository before you can see the content of these encrypted files. We use two git hooks:
+(1) to issue warning to prevent accidentally pushing encrypted files in unencrypted state and (2) to make sure 
+encrypted file permissions are limited to current user (removing read access for group or others).
+
 
 ## Running the dev environment locally in a single instance
 
