@@ -216,6 +216,13 @@ Go to <kbd>Home</kbd> > <kbd>Configure Metadata</kbd> > <kbd>Manage Forms</kbd>
 * Click on <kbd>Save</kbd>
 
 #### 5.3 Manage Apps
+
+Go to <kbd>Home</kbd> > <kbd>System Administration</kbd> > <kbd>Manage Apps</kbd>
+
+* Click on <kbd>Add App Definition</kbd> button
+* App ID: **referenceapplication.registrationapp.registerIEMS**
+* Definition: Copy [this JSON](https://raw.githubusercontent.com/openmrs-indianaems/openmrs-indianaems-config/master/apps/referenceapplication.registrationapp.registerIEMS.json) into definition
+
 Stop the following apps:
 ```
 referenceapplication.registrationapp.registerPatient
@@ -229,12 +236,6 @@ chartsearch.chartSearchApp
 referenceapplication.personalRelationships
 coreapps.conditionlist
 ```
-
-Go to <kbd>Home</kbd> > <kbd>System Administration</kbd> > <kbd>Manage Apps</kbd>
-
-* Click on <kbd>Add App Definition</kbd> button
-* App ID: **referenceapplication.registrationapp.registerIEMS**
-* Definition: Copy [this JSON](https://raw.githubusercontent.com/openmrs-indianaems/openmrs-indianaems-config/master/apps/referenceapplication.registrationapp.registerIEMS.json) into definition
 
 #### 5.4 Adding User Accounts
 Add user **clinicProvider** and **clinicAdmin**
