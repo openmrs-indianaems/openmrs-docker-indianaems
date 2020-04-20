@@ -10,7 +10,7 @@ services:
       timeout: 10s
       retries: 10
       interval: 1m
-      #start-period: 2m
+      # start-period: 2m
     volumes:
       - /data/initdb:/docker-entrypoint-initdb.d
       - /data/database:/var/lib/mysql
