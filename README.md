@@ -187,36 +187,36 @@ load all the concepts the first time.
 
 **NOTE:** This should happen before adding any patients or it might lead to inconsistent behaviour
 
-Go to System Administration > Advanced Administration > Manage Patient Identifier Sources
+Go to <kbd>System Administration</kbd> > <kbd>Advanced Administration</kbd> > <kbd>Manage Patient Identifier Sources</kbd>
 
-Click on Configure
+Click on Configure, makes these changes, and save them:
 
-Change First Identifier Source to 100
-
-Suffix - CE
-
-Min Length 3
+* First Identifier Source: **100**
+* Suffix: **CE**
+* Min Length: **3**
 
 #### 5.2 Add HTML Form
 
-Go to System Administration > Advanced Administration > Manage HTML Forms
+Go to <kbd>System Administration</kbd> > <kbd>Advanced Administration</kbd> > <kbd>Manage HTML Forms</kbd>
 
 Click on New HTML Form
 
-Select Name as COVID-19 NOTE
+* Name: **COVID-19 NOTE**
+* Version: enter the version from the parenthetical in the `formName` on [this line](https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/htmlform/COVID-19%20Note.html#L1)
+* Encounter type: **COVID-19 Note**
+* Click on <kbd>Save</kbd>
+* Replace the default HTML with [this HTML form definition](https://raw.githubusercontent.com/openmrs-indianaems/openmrs-indianaems-config/master/htmlform/COVID-19%20Note.html)
+* Check the box for **Published**
+* Click on <kbd>Save</kbd>
 
-Version is the one highlighted in the
+Go to <kbd>Home</kbd> > <kbd>Configure Metadata</kbd> > <kbd>Manage Forms</kbd>
 
-https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/htmlform/COVID-19%20Note.html
-
-Replace the default HTML with the above HTML in the form and save
-
-Go to Home > Configure Metadata > Manage Forms
-Click on `add` beside COVID-19 Note and select Visit actions from the dropdown
-Click on Save
+* Click on __Add__ beside COVID-19 Note
+* UI Location: **Patient Dashboard - Current Visit Actions**
+* Click on <kbd>Save</kbd>
 
 #### 5.3 Manage Apps
-Stop the following apps -
+Stop the following apps:
 ```
 referenceapplication.registrationapp.registerPatient
 registrationapp.basicRegisterPatient
@@ -230,10 +230,14 @@ referenceapplication.personalRelationships
 coreapps.conditionlist
 ```
 
-Copy the app Json from https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/apps/referenceapplication.registrationapp.registerIEMS.json and add it to the apps
+Go to <kbd>Home</kbd> > <kbd>System Administration</kbd> > <kbd>Manage Apps</kbd>
+
+* Click on <kbd>Add App Definition</kbd> button
+* App ID: **referenceapplication.registrationapp.registerIEMS**
+* Definition: Copy [this JSON](https://raw.githubusercontent.com/openmrs-indianaems/openmrs-indianaems-config/master/apps/referenceapplication.registrationapp.registerIEMS.json) into definition
 
 #### 5.4 Adding User Accounts
-Add user clinicProvider and clinicAdmin
+Add user **clinicProvider** and **clinicAdmin**
 <img width="648" alt="Screen Shot 2020-04-20 at 12 21 47 AM" src="https://user-images.githubusercontent.com/1560244/79713854-01ce6000-829d-11ea-8e6a-6f36e88f7dad.png">
 <img width="674" alt="Screen Shot 2020-04-20 at 12 22 08 AM" src="https://user-images.githubusercontent.com/1560244/79713856-02ff8d00-829d-11ea-888a-bc7efd949533.png">
 
