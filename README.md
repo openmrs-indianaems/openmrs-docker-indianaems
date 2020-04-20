@@ -232,7 +232,6 @@ coreapps.obsAcrossEncounters
 coreapps.obsGraph
 coreapps.relationships
 coreapps.awaitingAdmission
-chartsearch.chartSearchApp
 referenceapplication.personalRelationships
 coreapps.conditionlist
 ```
