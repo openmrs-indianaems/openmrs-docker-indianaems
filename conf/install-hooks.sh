@@ -11,4 +11,8 @@ fi
 echo -n "Install git hooks..."
 ln -s -f ../../conf/hooks/post-merge.git-crypt.sh $GIT_HOOKS_DIR/post-merge
 ln -s -f ../../conf/hooks/pre-commit.git-crypt.sh $GIT_HOOKS_DIR/pre-commit
+
+# Apply post-merge permission changes to protect git-crypt files
+$GIT_HOOKS_DIR/post-merge
+
 echo "done."
