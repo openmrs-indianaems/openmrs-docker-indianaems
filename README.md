@@ -117,6 +117,8 @@ and
 $ ./production up -d
 ```
 
+**NOTE:** The first time this might take around 5-10 minutes
+
 ### 3. Clear out concepts on db server
 
 ```
