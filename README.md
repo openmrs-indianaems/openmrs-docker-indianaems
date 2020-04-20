@@ -178,7 +178,7 @@ docker logs -f openmrs
 Log in through the Reference Application user interface, navigate to System Administration > Manage Module, and
 load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature.
 
-NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes or so to
+NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
 load all the concepts the first time.
 
 ### 5. Manual Steps
@@ -211,6 +211,35 @@ https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/html
 
 Replace the default HTML with the above HTML in the form and save
 
-#### 5.3 Roles (A Standard User)
+Go to Home > Configure Metadata > Manage Forms
+Click on `add` beside COVID-19 Note and select Visit actions from the dropdown
+Click on Save
 
-#### 5.4 Manage Apps (Stop apps and copy Burke's Register APP)
+#### 5.3 Manage Apps
+Stop the following apps -
+```
+referenceapplication.registrationapp.registerPatient
+registrationapp.basicRegisterPatient
+coreapps.latestObsForConceptList
+coreapps.obsAcrossEncounters
+coreapps.obsGraph
+coreapps.relationships
+coreapps.awaitingAdmission
+chartsearch.chartSearchApp
+referenceapplication.personalRelationships
+coreapps.conditionlist
+```
+
+Copy the app Json from https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/apps/referenceapplication.registrationapp.registerIEMS.json and add it to the apps
+
+#### 5.4 Adding User Accounts
+Add user clinicProvider and clinicAdmin
+<img width="648" alt="Screen Shot 2020-04-20 at 12 21 47 AM" src="https://user-images.githubusercontent.com/1560244/79713854-01ce6000-829d-11ea-8e6a-6f36e88f7dad.png">
+<img width="674" alt="Screen Shot 2020-04-20 at 12 22 08 AM" src="https://user-images.githubusercontent.com/1560244/79713856-02ff8d00-829d-11ea-888a-bc7efd949533.png">
+
+
+**Future improvements**
+- Record and Remove duplicates in different loacales - Report to Andy Kanter and see if this can be improved in the CIEL dictionary itself.
+- capture Idgen settings needed to automate the 5.1 Change Identifier step
+- Use Metadata package folder and see if [Covid_Form_-_All_Concepts-1.zip](https://github.com/openmrs-indianaems/openmrs-docker-indianaems/files/4500840/Covid_Form_-_All_Concepts-1.zip)  Can be loaded automatically to remove the manual step of add HTML Form
+- See if Concept sources can be added to initializer module, this should automate the step of manually loading the sources througn MySQL
