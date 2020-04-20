@@ -119,6 +119,9 @@ $ ./production up -d
 
 **NOTE:** The first time this might take around 5-10 minutes
 
+Move to Step #3 after seeing the following page on the server
+<img width="1014" alt="Screen Shot 2020-04-19 at 9 25 53 PM" src="https://user-images.githubusercontent.com/1560244/79706175-54505200-8286-11ea-99d8-899e318941d6.png">
+
 ### 3. Clear out concepts on db server
 
 ```
