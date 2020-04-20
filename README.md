@@ -120,7 +120,8 @@ $ ./production up -d
 ### 3. Clear out concepts on db server
 
 ```
-$ docker exec -it openmrs bash
+$ docker exec openmrs-mysql env    # gives the env to log into mysql
+$ docker exec -it openmrs-mysql bash
 # mysql -u openmrs -p
 ```
 
