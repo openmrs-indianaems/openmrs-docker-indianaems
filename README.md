@@ -214,3 +214,10 @@ Replace the default HTML with the above HTML in the form and save
 #### 5.3 Roles (A Standard User)
 
 #### 5.4 Manage Apps (Stop apps and copy Burke's Register APP)
+
+
+**Future improvements**
+- Record and Remove duplicates in different loacales - Report to Andy Kanter and see if this can be improved in the CIEL dictionary itself.
+- capture Idgen settings needed to automate the 5.1 Change Identifier step
+- Use Metadata package folder and see if [Covid_Form_-_All_Concepts-1.zip](https://github.com/openmrs-indianaems/openmrs-docker-indianaems/files/4500840/Covid_Form_-_All_Concepts-1.zip)  Can be loaded automatically to remove the manual step of add HTML Form
+- See if Concept sources can be added to initializer module, this should automate the step of manually loading the sources througn MySQL
