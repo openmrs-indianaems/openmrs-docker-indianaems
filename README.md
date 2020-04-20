@@ -155,6 +155,12 @@ update concept_name set voided=1, date_voided=now(), voided_by=1
   where concept_name_id in (select concept_name_id from foo);
 ```
 
+Add SNOMED US Concept Source
+
+```
+INSERT INTO `concept_reference_source` VALUES (17,'SNOMED US','SNOMED CT US Extension',NULL,1,'2012-09-15 12:11:39',0,1,NULL,NULL,'17ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD',NULL,NULL,1);
+```
+
 ### 4. Initialize Metadata
 
 First, start monitoring logs in a terminal on app server:
@@ -171,15 +177,7 @@ load all the concepts the first time.
 
 ### 5. Manual Steps
 
-#### 5.1 Remove Locations 
-Go to System Administration > Advanced Administration > Manage Locations 
-Select the locations as shown in the image and click on Delete Locations
-
-<img width="279" alt="Screen Shot 2020-04-17 at 8 31 29 AM" src="https://user-images.githubusercontent.com/1560244/79569871-74192780-8086-11ea-8dd1-8e837f0e8d56.png">
-
-**Note:** This action may result in an error, just click on back on your browser and you should see the locations to be updated appropriately
-
-#### 5.2 Change Identifier 
+#### 5.1 Change Identifier 
 **NOTE:** This should happen before adding any patients or it might lead to inconsistent behaviour
 
 Go to System Administration > Advanced Administration > Manage Patient Identifier Sources
@@ -192,7 +190,7 @@ Suffix - CE
 
 Min Length 3
 
-#### 5.3 Add HTML Form 
+#### 5.2 Add HTML Form 
 Go to System Administration > Advanced Administration > Manage HTML Forms 
 
 Click on New HTML Form
@@ -205,7 +203,7 @@ https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/html
 
 Replace the default HTML with the above HTML in the form and save
 
-#### 5.4 Roles (A Standard User)
-#### 5.5 Manage Apps (Stop apps and copy Burke's Register APP)
+#### 5.3 Roles (A Standard User)
+#### 5.4 Manage Apps (Stop apps and copy Burke's Register APP)
 
 
