@@ -211,9 +211,31 @@ https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/html
 
 Replace the default HTML with the above HTML in the form and save
 
-#### 5.3 Roles (A Standard User)
+Go to Home > Configure Metadata > Manage Forms
+Click on `add` beside COVID-19 Note and select Visit actions from the dropdown
+Click on Save
 
-#### 5.4 Manage Apps (Stop apps and copy Burke's Register APP)
+#### 5.3 Manage Apps
+Stop the following apps -
+```
+referenceapplication.registrationapp.registerPatient
+registrationapp.basicRegisterPatient
+coreapps.latestObsForConceptList
+coreapps.obsAcrossEncounters
+coreapps.obsGraph
+coreapps.relationships
+coreapps.awaitingAdmission
+chartsearch.chartSearchApp
+referenceapplication.personalRelationships
+coreapps.conditionlist
+```
+
+Copy the app Json from https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/apps/referenceapplication.registrationapp.registerIEMS.json and add it to the apps
+
+#### 5.4 Adding User Accounts
+Add user clinicProvider and clinicAdmin
+<img width="648" alt="Screen Shot 2020-04-20 at 12 21 47 AM" src="https://user-images.githubusercontent.com/1560244/79713854-01ce6000-829d-11ea-8e6a-6f36e88f7dad.png">
+<img width="674" alt="Screen Shot 2020-04-20 at 12 22 08 AM" src="https://user-images.githubusercontent.com/1560244/79713856-02ff8d00-829d-11ea-888a-bc7efd949533.png">
 
 
 **Future improvements**
