@@ -1,0 +1,2 @@
+uuid,Role name,Description,Inherited roles,Privileges
+045450e4-3a4a-4489-8ab5-2a0bfca3ee34,Application: A Standard User,A user who can perform basic operations of the system.,Application: Edits Existing Encounters;Application: Enters ADT Events;Application: Enters Vitals;Application: Records Allergies;Application: Registers Patients;Application: Uses Capture Vitals App;Application: Uses Patient Summary;Application: Writes Clinical Notes;Privilege Level: High,,
