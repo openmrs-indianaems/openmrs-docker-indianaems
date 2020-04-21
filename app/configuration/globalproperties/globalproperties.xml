@@ -24,5 +24,29 @@
       <property>metadatamapping.localConceptSourceUuid</property>
       <value>21ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</value>
     </globalProperty>
+    <globalProperty>
+      <property>htmlformentry.dateFormat</property>
+      <value>MM/dd/yyyy</value>
+    </globalProperty>
+    <globalProperty>
+      <property>reporting.defaultDateFormat</property>
+      <value>MM/dd/yyyy</value>
+    </globalProperty>
+    <globalProperty>
+      <property>uiframework.formatter.JSdateAndTimeFormat</property>
+      <value>MM/DD/YYYY, HH:mm:ss</value>
+    </globalProperty>
+    <globalProperty>
+      <property>uiframework.formatter.JSdateFormat</property>
+      <value>MM/DD/YYYY</value>
+    </globalProperty>
+    <globalProperty>
+      <property>uiframework.formatter.dateAndTimeFormat</property>
+      <value>MM/dd/yyyy, HH:mm:ss</value>
+    </globalProperty>
+    <globalProperty>
+      <property>uiframework.formatter.dateFormat</property>
+      <value>MM/dd/yyyy</value>
+    </globalProperty>
   </globalProperties>
 </config>
