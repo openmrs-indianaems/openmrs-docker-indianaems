@@ -186,7 +186,20 @@ load all the concepts the first time.
 
 ### 5. Manual Steps
 
-#### 5.1 Change Identifier
+#### 5.1 Secure the system
+
+Change the super user password to a secure password
+
+* Log in as admin with default password
+* On home screen, click on "admin" username in header and select <kbd>My Account</kbd>. If the "My Account" 
+  popover does not appear when clicking on the admin username, navigate to <kbd>Advanced Administration</kbd> > 
+  <kbd>Manage Modules</kbd> and click on admin username there as a workaround.
+* Choose <kbd>Change Password</kbd>
+* Change the `admin` user password to a secure password and save that password securely for future reference
+  * It should be at least 12 characters long
+  * It should contain a mix of uppercase, lowercase, digits, and special characters
+
+#### 5.2 Change Identifier
 
 **NOTE:** This should happen before adding any patients or it might lead to inconsistent behaviour
 
@@ -198,7 +211,7 @@ Click on Configure, makes these changes, and save them:
 * Suffix: **CE**
 * Min Length: **3**
 
-#### 5.2 Add HTML Form
+#### 5.3 Add HTML Form
 
 Go to <kbd>System Administration</kbd> > <kbd>Advanced Administration</kbd> > <kbd>Manage HTML Forms</kbd>
 
@@ -218,7 +231,7 @@ Go to <kbd>Home</kbd> > <kbd>Configure Metadata</kbd> > <kbd>Manage Forms</kbd>
 * UI Location: **Patient Dashboard - Current Visit Actions**
 * Click on <kbd>Save</kbd>
 
-#### 5.3 Manage Apps
+#### 5.4 Manage Apps
 
 Go to <kbd>Home</kbd> > <kbd>System Administration</kbd> > <kbd>Manage Apps</kbd>
 
@@ -239,11 +252,43 @@ referenceapplication.personalRelationships
 coreapps.conditionlist
 ```
 
-#### 5.4 Adding User Accounts
-Add user **clinicProvider** and **clinicAdmin**
-<img width="648" alt="Screen Shot 2020-04-20 at 12 21 47 AM" src="https://user-images.githubusercontent.com/1560244/79713854-01ce6000-829d-11ea-8e6a-6f36e88f7dad.png">
-<img width="674" alt="Screen Shot 2020-04-20 at 12 22 08 AM" src="https://user-images.githubusercontent.com/1560244/79713856-02ff8d00-829d-11ea-888a-bc7efd949533.png">
+#### 5.5 Adding User Accounts
 
+Add two users: **clinicProvider** and **clinicAdmin**
+
+1. Navigate to <kbd>System Administration</kbd> > <kbd>Manage Accounts</kbd>
+2. Click on <kbd>Add New Account</kbd>
+  * Family Name: **Pop-up Clinic**
+  * Given Name: **Provider**
+  * Gender: **Female**
+3. In the USER ACCOUNT DETAILS section, check the "Add User Account?" box
+  * Username: **clinicProvider**
+  * Privilege Level: **High**
+  * Password: **Create a secure password with at least 8 chars, at least one UPPERCASE letter, at least one digit**
+    _(create a new password, don't use the admin password)_
+  * Confirm Password: **Re-enter password** _(save password securely so it can be communicated to approprriate users)_
+  * Uncheck the "Force Password Change" checkbox
+  * Capabilities: Check **A Standard User** (first option)
+4. In the PROVIDER DETAILS section, check the "Add Provider Account?" box
+  * Identifier: **clinicProvider**
+  * Provider Role: **Clinical Doctor**
+5. Click the <kbd>Save</kbd> button
+6. Click on <kbd>Add New Account</kbd>
+  * Family Name: **Pop-up Clinic**
+  * Given Name: **Admin**
+  * Gender: **Female**
+7. In the USER ACCOUNT DETAILS section, check the "Add User Account?" box
+  * Username: **clinicAdmin**
+  * Privilege Level: **Full**
+  * Password: **Create a secure password with at least 8 chars, at least one UPPERCASE letter, at least one digit** 
+    _(don't re-use a password used earlier)_
+  * Confirm Password: **Re-enter password** _(save password securely so it can be communicated to approprriate users)_
+  * Uncheck the "Force Password Change" checkbox
+  * Capabilities: Check the first two options, **A Standard User** _and_ **Administers System**
+8. In the PROVIDER DETAILS section, check the "Add Provider Account?" box
+  * Identifier: **clinicAdmin**
+  * Provider Role: **Clinical Doctor**
+9. Click the <kbd>Save</kbd> button
 
 **Future improvements**
 - Record and Remove duplicates in different loacales - Report to Andy Kanter and see if this can be improved in the CIEL dictionary itself.
