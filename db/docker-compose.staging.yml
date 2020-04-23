@@ -14,5 +14,6 @@ services:
     volumes:
       - /data/initdb:/docker-entrypoint-initdb.d
       - /data/database:/var/lib/mysql
+      - /data/log/mysql:/var/log/mysql
       - /data/backup:/backup
     container_name: openmrs-mysql

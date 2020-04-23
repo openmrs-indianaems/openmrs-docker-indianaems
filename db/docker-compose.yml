@@ -13,6 +13,7 @@ services:
       - ./mysql/conf.d:/etc/mysql/conf.d
       - ./mysql/mysql.conf.d:/etc/mysql/mysql.conf.d
       - mysql-data:/var/lib/mysql
+      - ../local/log/mysql:/var/log/mysql
 
 volumes:
   mysql-data:
