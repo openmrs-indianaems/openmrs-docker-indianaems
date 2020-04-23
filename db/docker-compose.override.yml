@@ -2,8 +2,6 @@ version: "3.0"
 
 services:
   mysql:
-    ports:
-      - "3306:3306"
     env_file: .dev.env
     volumes:
       - ../local/initdb.d/:/docker-entrypoint-initdb.d
