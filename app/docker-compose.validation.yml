@@ -1,0 +1,17 @@
+version: "3.0"
+
+services:
+  openmrs-reference-application:
+    restart: "always"
+    container_name: openmrs
+    env_file: .validation.env
+    expose:
+      - 9090
+    ports:
+      - 9090:8080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/openmrs/"]
+      timeout: 20s
+    volumes:
+      - /validation/docker/run/tomcat_log:/usr/local/tomcat/logs
+      # - /data/docker/run/setenv.sh:/usr/local/tomcat/bin/setenv.sh

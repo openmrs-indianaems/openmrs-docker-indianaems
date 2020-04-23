@@ -1,5 +1,6 @@
 # Files that are going to be encrypted
 .prod.env filter=git-crypt diff=git-crypt
+.validation.env filter=git-crypt diff=git-crypt
 .staging.env filter=git-crypt diff=git-crypt
 *.gpg filter=git-crypt diff=git-crypt
 *.key filter=git-crypt diff=git-crypt

@@ -8,7 +8,7 @@ services:
     healthcheck:
       test: "exit 0"
     volumes:
-      # - "./dbdump: /docker-entrypoint-initdb.d #if you dont need to use a backup sql to initialize the database"
+      - ../local/initdb:/docker-entrypoint-initdb.d
       - "mysql-data:/var/lib/mysql"
 
   openmrs-reference-application:
@@ -17,6 +17,9 @@ services:
     env_file: .dev.env
     ports:
       - 8080:8080
+    volumes:
+      - openmrs-reference-application-data:/usr/local/tomcat/.OpenMRS/
 
 volumes:
   mysql-data:
+  openmrs-reference-application-data:
