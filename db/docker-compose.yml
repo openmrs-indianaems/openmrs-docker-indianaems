@@ -9,7 +9,9 @@ services:
     healthcheck:
       test: "exit 0"
     volumes:
-      - ./dbdump:/docker-entrypoint-initdb.d
+      - ../local/initdb.d/:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/mysql.conf.d:/etc/mysql/mysql.conf.d
       - mysql-data:/var/lib/mysql
 
 volumes:
