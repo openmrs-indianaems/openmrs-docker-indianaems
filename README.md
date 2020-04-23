@@ -204,7 +204,7 @@ Go to <kbd>System Administration</kbd> > <kbd>Advanced Administration</kbd> > <k
 
 Click on New HTML Form
 
-* Name: **COVID-19 NOTE**
+* Name: **COVID-19 Note**
 * Version: enter the version from the parenthetical in the `formName` on [this line](https://github.com/openmrs-indianaems/openmrs-indianaems-config/blob/master/htmlform/COVID-19%20Note.html#L1)
 * Encounter type: **COVID-19 Note**
 * Click on <kbd>Save</kbd>
