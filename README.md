@@ -124,11 +124,14 @@ Move to Step #3 after seeing the following page on the server
 
 ### 3. Clear out concepts on db server
 
+Open MySQL:
+
 ```
-$ docker exec openmrs-mysql env    # gives the env to log into mysql
 $ docker exec -it openmrs-mysql bash
-# mysql -u openmrs -p
+# mysql -u $MYSQL_USER -p$MYSQL_PASSWORD
 ```
+
+Switch to openmrs database:
 
 ```
 use openmrs;
