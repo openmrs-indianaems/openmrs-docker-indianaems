@@ -35,7 +35,7 @@ Next, perform one-time install of client-side git hooks to keep encrypted files 
 conf/install-hooks.sh
 ```
 
-NOTE: environment files for staging and production are encrypted using `git-crypt`. Your public gpg key must be
+**NOTE:** environment files for staging and production are encrypted using `git-crypt`. Your public gpg key must be
 registered within the repository before you can see the content of these encrypted files. We use two git hooks:
 (1) to issue warning to prevent accidentally pushing encrypted files in unencrypted state and (2) to make sure
 encrypted file permissions are limited to current user (removing read access for group or others).
@@ -180,7 +180,7 @@ Second, in the Reference Application user interface:
 * Navigate to <kbd>System Administration</kbd> > <kbd>Manage Modules</kbd>
 * Load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature
 
-NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
+**NOTE:** the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
 load all the concepts the first time.
 
 ### 5. Manual Steps
@@ -238,7 +238,7 @@ Go to <kbd>Home</kbd> > <kbd>System Administration</kbd> > <kbd>Manage Apps</kbd
 * App ID: **referenceapplication.registrationapp.registerIEMS**
 * Definition: Copy [this JSON](https://raw.githubusercontent.com/openmrs-indianaems/openmrs-indianaems-config/master/apps/referenceapplication.registrationapp.registerIEMS.json) into definition
 
-Stop the following apps:
+Stop the following apps (if you see a square &#x25FE; to the right of any of these, click it to stop the app):
 ```
 referenceapplication.registrationapp.registerPatient
 registrationapp.basicRegisterPatient
@@ -250,6 +250,8 @@ coreapps.awaitingAdmission
 referenceapplication.personalRelationships
 coreapps.conditionlist
 ```
+
+**NOTE:** The apps listed above should all have a triangle &#x25B6; to the right, indicating they are stopped.
 
 #### 5.5 Adding User Accounts
 
