@@ -175,8 +175,10 @@ First, start monitoring logs in a terminal on app server:
 docker logs -f openmrs
 ```
 
-Log in through the Reference Application user interface, navigate to System Administration > Manage Module, and
-load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature.
+Second, in the Reference Application user interface:
+
+* Navigate to <kbd>System Administration</kbd> > <kbd>Manage Modules</kbd>
+* Load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature
 
 NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
 load all the concepts the first time.
