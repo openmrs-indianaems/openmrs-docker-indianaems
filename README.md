@@ -35,7 +35,7 @@ Next, perform one-time install of client-side git hooks to keep encrypted files 
 conf/install-hooks.sh
 ```
 
-NOTE: environment files for staging and production are encrypted using `git-crypt`. Your public gpg key must be
+**NOTE:** environment files for staging and production are encrypted using `git-crypt`. Your public gpg key must be
 registered within the repository before you can see the content of these encrypted files. We use two git hooks:
 (1) to issue warning to prevent accidentally pushing encrypted files in unencrypted state and (2) to make sure
 encrypted file permissions are limited to current user (removing read access for group or others).
@@ -95,31 +95,27 @@ cat backup.sql | docker exec -i [containerId] /usr/bin/mysql -u openmrs --passwo
 
 ```
 $ cd db
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+$ ./production up -d
 ```
 
 ### 2. Start OpenMRS on app server
 
 ```
 $ cd app
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
-There are convenience scripts for staging & production, so you don't have to remember to invoke two docker-compose files:
-
-```
-$ ./staging up -d
-```
-
-and
-
-```
 $ ./production up -d
 ```
 
-**NOTE:** The first time this might take around 5-10 minutes
+Convenience scripts in the `app` and `db` folders:
 
-Move to Step #3 after seeing the following page on the server
+| Script         | Equivalent to                                                                 |
+|----------------|-------------------------------------------------------------------------------|
+| `./production` | `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`.      |
+| `./staging`    | `docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d`    |
+| `./validation` | `docker-compose -f docker-compose.yml -f docker-compose.validation.yml up -d` |
+
+**NOTE:** The first time the app is started, it can take around 5-10 minutes
+
+Move to Step #3 after seeing the following page on the server:
 <img width="1014" alt="Screen Shot 2020-04-19 at 9 25 53 PM" src="https://user-images.githubusercontent.com/1560244/79706175-54505200-8286-11ea-99d8-899e318941d6.png">
 
 ### 3. Clear out concepts on db server
@@ -137,37 +133,38 @@ Switch to openmrs database:
 use openmrs;
 ```
 
-Remove all synonyms
+Void all synonyms:
 
 ```
-update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
+update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type is null;
 ```
 
-Create temp table of fully specified, active concept names
+Create temp table of duplicate concept names:
 
 ```
 create temporary table foo (
-    select t2.concept_name_id from openmrs.concept_name t1
-      join concept_name t2
-      on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
-      join concept t3 on t1.concept_id=t3.concept_id
-      join concept t4 on t2.concept_id=t4.concept_id
-    where
-      t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
-  );
+  select t2.concept_name_id from concept_name t1
+  join concept_name t2
+    on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
+  join concept t3 on t1.concept_id=t3.concept_id
+  join concept t4 on t2.concept_id=t4.concept_id
+  where
+    t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
+);
 ```
 
-Void all existing concepts
+Void all duplicate concept names:
 
 ```
 update concept_name set voided=1, date_voided=now(), voided_by=1
   where concept_name_id in (select concept_name_id from foo);
 ```
 
-Add SNOMED US Concept Source
+Add SNOMED US Concept Source:
 
 ```
-INSERT INTO `concept_reference_source` VALUES (17,'SNOMED US','SNOMED CT US Extension',NULL,1,'2012-09-15 12:11:39',0,1,NULL,NULL,'17ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD',NULL,NULL,1);
+INSERT INTO concept_reference_source VALUES (17,'SNOMED US','SNOMED CT US Extension',NULL,1,
+  '2012-09-15 12:11:39',0,1,NULL,NULL,'17ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD',NULL,NULL,1);
 ```
 
 ### 4. Initialize Metadata
@@ -178,10 +175,12 @@ First, start monitoring logs in a terminal on app server:
 docker logs -f openmrs
 ```
 
-Log in through the Reference Application user interface, navigate to System Administration > Manage Module, and
-load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature.
+Second, in the Reference Application user interface:
 
-NOTE: the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
+* Navigate to <kbd>System Administration</kbd> > <kbd>Manage Modules</kbd>
+* Load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature
+
+**NOTE:** the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
 load all the concepts the first time.
 
 ### 5. Manual Steps
@@ -239,7 +238,7 @@ Go to <kbd>Home</kbd> > <kbd>System Administration</kbd> > <kbd>Manage Apps</kbd
 * App ID: **referenceapplication.registrationapp.registerIEMS**
 * Definition: Copy [this JSON](https://raw.githubusercontent.com/openmrs-indianaems/openmrs-indianaems-config/master/apps/referenceapplication.registrationapp.registerIEMS.json) into definition
 
-Stop the following apps:
+Stop the following apps (if you see a square &#x25FE; to the right of any of these, click it to stop the app):
 ```
 referenceapplication.registrationapp.registerPatient
 registrationapp.basicRegisterPatient
@@ -251,6 +250,8 @@ coreapps.awaitingAdmission
 referenceapplication.personalRelationships
 coreapps.conditionlist
 ```
+
+**NOTE:** The apps listed above should all have a triangle &#x25B6; to the right, indicating they are stopped.
 
 #### 5.5 Adding User Accounts
 
