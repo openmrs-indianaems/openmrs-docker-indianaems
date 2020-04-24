@@ -133,37 +133,38 @@ Switch to openmrs database:
 use openmrs;
 ```
 
-Remove all synonyms
+Void all synonyms:
 
 ```
-update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type=null;
+update concept_name set voided=1, date_voided=now(), voided_by=1 where concept_name_type is null;
 ```
 
-Create temp table of fully specified, active concept names
+Create temp table of duplicate concept names:
 
 ```
 create temporary table foo (
-    select t2.concept_name_id from openmrs.concept_name t1
-      join concept_name t2
-      on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
-      join concept t3 on t1.concept_id=t3.concept_id
-      join concept t4 on t2.concept_id=t4.concept_id
-    where
-      t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
-  );
+  select t2.concept_name_id from concept_name t1
+  join concept_name t2
+    on t1.concept_name_id != t2.concept_name_id and t1.name = t2.name and t1.concept_name_type = "FULLY_SPECIFIED"
+  join concept t3 on t1.concept_id=t3.concept_id
+  join concept t4 on t2.concept_id=t4.concept_id
+  where
+    t1.voided=0 and t2.voided=0 and t3.retired=0 and t4.retired=0
+);
 ```
 
-Void all existing concepts
+Void all duplicate concept names:
 
 ```
 update concept_name set voided=1, date_voided=now(), voided_by=1
   where concept_name_id in (select concept_name_id from foo);
 ```
 
-Add SNOMED US Concept Source
+Add SNOMED US Concept Source:
 
 ```
-INSERT INTO `concept_reference_source` VALUES (17,'SNOMED US','SNOMED CT US Extension',NULL,1,'2012-09-15 12:11:39',0,1,NULL,NULL,'17ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD',NULL,NULL,1);
+INSERT INTO concept_reference_source VALUES (17,'SNOMED US','SNOMED CT US Extension',NULL,1,
+  '2012-09-15 12:11:39',0,1,NULL,NULL,'17ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD',NULL,NULL,1);
 ```
 
 ### 4. Initialize Metadata
