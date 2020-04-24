@@ -178,10 +178,13 @@ docker logs -f openmrs
 Second, in the Reference Application user interface:
 
 * Navigate to <kbd>System Administration</kbd> > <kbd>Manage Modules</kbd>
-* Load the initializer module (available in this repository under app/modules/) through OpenMRS manage modules feature
+* Click on the <kbd>&#x2795;Add/Upgrade Modules</kbd> button
+* Click within the "Drag files here or click to upload" box and select the initializer module `.omod` file 
+  (available in this repository under app/modules/)
+* Click on <kbd>Upload Module</kbd> to upload the module
 
-**NOTE:** the CIEL dictionary import (concepts) is importing ~52000 concepts and will take around 45 minutes - 2 hours to
-load all the concepts the first time.
+**NOTE:** installing the module will being the CIEL dictionary import (concepts), importing ~52000 concepts, 
+and can take 45 to 90 minutes to load all the concepts the first time.
 
 ### 5. Manual Steps
 
