@@ -24,4 +24,3 @@ services:
       timeout: 20s
     volumes:
       - /data/docker/run/tomcat_log:/usr/local/tomcat/logs
-      # - /data/docker/run/setenv.sh:/usr/local/tomcat/bin/setenv.sh

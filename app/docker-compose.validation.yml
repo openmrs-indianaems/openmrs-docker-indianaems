@@ -1,17 +1,30 @@
 version: "3.0"
 
 services:
+  mysql:
+    restart: "always"
+    image: mysql:5.6
+    container_name: validation-mysql
+    command: "mysqld --character-set-server=utf8 --collation-server=utf8_bin --default-storage-engine=INNODB --max_allowed_packet=256M --innodb_log_file_size=2GB --transaction-isolation=READ-COMMITTED --binlog_format=row"
+    env_file: .validation.env
+    healthcheck:
+      test: "exit 0"
+    volumes:
+      - ../local/initdb:/docker-entrypoint-initdb.d
+      - "validation-mysql-data:/var/lib/mysql"
+
   openmrs-reference-application:
     restart: "always"
-    container_name: openmrs
+    container_name: validation-openmrs
     env_file: .validation.env
-    expose:
-      - 9090
     ports:
       - 9090:8080
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9090/openmrs/"]
       timeout: 20s
     volumes:
-      - /validation/docker/run/tomcat_log:/usr/local/tomcat/logs
-      # - /data/docker/run/setenv.sh:/usr/local/tomcat/bin/setenv.sh
+      - validation-openmrs-data:/usr/local/tomcat/.OpenMRS/
+
+volumes:
+  validation-mysql-data:
+  validation-openmrs-data:
