@@ -95,31 +95,27 @@ cat backup.sql | docker exec -i [containerId] /usr/bin/mysql -u openmrs --passwo
 
 ```
 $ cd db
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+$ ./production up -d
 ```
 
 ### 2. Start OpenMRS on app server
 
 ```
 $ cd app
-$ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-```
-
-There are convenience scripts for staging & production, so you don't have to remember to invoke two docker-compose files:
-
-```
-$ ./staging up -d
-```
-
-and
-
-```
 $ ./production up -d
 ```
 
-**NOTE:** The first time this might take around 5-10 minutes
+Convenience scripts in the `app` and `db` folders:
 
-Move to Step #3 after seeing the following page on the server
+| Script         | Equivalent to                                                                 |
+|----------------|-------------------------------------------------------------------------------|
+| `./production` | `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`.      |
+| `./staging`    | `docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d`    |
+| `./validation` | `docker-compose -f docker-compose.yml -f docker-compose.validation.yml up -d` |
+
+**NOTE:** The first time the app is started, it can take around 5-10 minutes
+
+Move to Step #3 after seeing the following page on the server:
 <img width="1014" alt="Screen Shot 2020-04-19 at 9 25 53 PM" src="https://user-images.githubusercontent.com/1560244/79706175-54505200-8286-11ea-99d8-899e318941d6.png">
 
 ### 3. Clear out concepts on db server
